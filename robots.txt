@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you/
+Disallow: /.netlify/
+Disallow: /compliance/
+Disallow: /agent/
+Disallow: /docs/
+Disallow: /tests/
+
+Sitemap: https://tnbcg.tech/sitemap.xml

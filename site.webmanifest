@@ -1,0 +1,34 @@
+{
+  "name": "TEKNIK",
+  "short_name": "TEKNIK",
+  "icons": [
+    {
+      "src": "/assets/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#0147FF",
+  "background_color": "#FAFBFD",
+  "display": "browser",
+  "start_url": "/",
+  "scope": "/",
+  "description": "Managed IT, cybersecurity and compliance."
+}

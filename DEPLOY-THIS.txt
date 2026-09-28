@@ -1,0 +1,63 @@
+DEPLOY THIS
+===========
+
+Drag THIS ZIP FILE onto Netlify. Do not extract it first.
+
+    https://app.netlify.com/projects/tnbcg/deploys
+
+Scroll to "Need to update your project?" and drop the .zip on it.
+Netlify unpacks it itself, which is why there is nothing to select and
+nothing to get wrong.
+
+
+WHAT IS IN HERE
+---------------
+Your complete working website, plus the remediation engine source in
+the right places. This is a superset of the site that was last working
+- nothing has been removed.
+
+  index.html, privacy/, terms/, accessibility/, tools/, thank-you/
+  assets/, sitemap.xml, robots.txt, 404.html, site.webmanifest
+  netlify.toml
+
+  netlify/functions/
+      email-security.js      existing, unchanged
+      report.js              existing, unchanged
+      create-checkout.js     existing, unchanged
+      oauth-start.mjs        NEW - dormant until configured
+      oauth-callback.mjs     NEW - dormant
+      remediate-plan.mjs     NEW - dormant
+      remediate-apply.mjs    NEW - dormant
+
+  lib/                       engine source the new functions import
+
+
+AFTER DEPLOYING, THE SITE BEHAVES EXACTLY AS BEFORE
+---------------------------------------------------
+The four new functions are not linked from any page. Nothing calls
+them. A visitor cannot reach them and will not notice any change.
+
+They are inert on purpose. They need environment variables and an
+Entra app registration that do not exist yet. Until then, calling one
+directly returns an error - which is correct, not a fault.
+
+
+WHY .mjs
+--------
+Your three existing functions are CommonJS. The four new ones are ES
+modules. They cannot share a package.json "type" setting, so the new
+ones use the .mjs extension. This lets both run side by side without
+touching your working code. Do not rename them to .js.
+
+
+WHEN YOU ARE READY TO TURN THE ENGINE ON
+-----------------------------------------
+See SETUP-REMEDIATION.md. Short version: register the Entra app, add
+the environment variables in Netlify, then a UI needs building. None
+of that changes anything in this zip.
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+Netlify keeps every deploy. Go to Deploys, open an earlier one, click
+"Publish deploy". You cannot permanently lose the site this way.

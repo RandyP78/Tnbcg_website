@@ -1,0 +1,10 @@
+node_modules/
+.netlify/
+tests/out/
+tests/fixture.json
+.env
+.env.*
+*.log
+
+# Cowork/desktop scratch
+Claude outputs/

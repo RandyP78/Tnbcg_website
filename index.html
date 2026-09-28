@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Managed IT, Cybersecurity &amp; Compliance | TEKNIK</title>
+<meta name="description" content="Managed IT, backups, Microsoft 365, cybersecurity and compliance — HIPAA, PCI-DSS, SOC 2 and CMMC. Remote-first with nationwide on-site coverage. Free assessment.">
+
+<link rel="canonical" href="https://tnbcg.tech/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tnbcg.tech/">
+<meta property="og:site_name" content="TEKNIK">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Managed IT, Cybersecurity &amp; Compliance | TEKNIK">
+<meta property="og:description" content="Backups, Microsoft 365, cybersecurity and compliance from one team. Remote-first, with on-site hands nationwide.">
+<meta property="og:image" content="https://tnbcg.tech/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TEKNIK — where solutions connect">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Managed IT, Cybersecurity &amp; Compliance | TEKNIK">
+<meta name="twitter:description" content="Backups, Microsoft 365, cybersecurity and compliance from one team. Remote-first, with on-site hands nationwide.">
+<meta name="twitter:image" content="https://tnbcg.tech/assets/og-image.png">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0147FF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* ============ TEKNIK BRAND — sampled from the logo ============
+       #0147FF  electric blue  (mark + tagline)
+       #2C2F3E  charcoal navy  (wordmark)
+     ============================================================= */
+  --brand-blue:#0147FF;
+  --brand-navy:#2C2F3E;
+
+  --ink:var(--brand-navy);
+  --ink-deep:#191C27;
+  --ink-soft:#4A5164;
+  --paper:#FAFBFD;
+  --paper-tint:#EFF2F9;
+  --paper-lift:#FFFFFF;
+
+  --accent:var(--brand-blue);
+  --accent-deep:#0033C4;   /* hover + small text on light */
+  --accent-lift:#7C9BFF;   /* the blue that survives a dark ground */
+  --trace:#C3CFEA;
+  --trace-dark:rgba(124,155,255,.32);
+
+  --on-dark:#E2E6F0;
+  --on-dark-dim:#98A0B5;
+  --line:rgba(44,47,62,.13);
+  --line-strong:rgba(44,47,62,.24);
+  --line-dark:rgba(226,230,240,.16);
+
+  --display:'Saira',system-ui,sans-serif;
+  --body:'Barlow',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --gut:clamp(1.15rem,4.5vw,3.5rem);
+  --rail:76px;
+  --maxw:1240px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(1rem,.96rem + .2vw,1.09rem);
+  line-height:1.62;-webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.03;margin:0;letter-spacing:-.015em}
+h1{font-size:clamp(2.5rem,1.5rem + 4.2vw,4.9rem);font-weight:700;letter-spacing:-.03em}
+h2{font-size:clamp(1.9rem,1.3rem + 2.4vw,3.1rem);letter-spacing:-.022em}
+h3{font-size:1.28rem;letter-spacing:-.01em}
+p{margin:0 0 1.05em}
+a{color:inherit}
+
+.skip{position:absolute;left:-9999px;background:var(--accent);color:#fff;padding:.75rem 1.25rem;z-index:200;font-weight:600}
+.skip:focus{left:.5rem;top:.5rem}
+:where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+
+/* ==========================================================
+   THE RAIL — one continuous circuit trace down the page with
+   a terminal node at each section. Taken from the mark.
+   ========================================================== */
+.sec{position:relative;--pad:clamp(3.6rem,7.5vw,6.4rem)}
+.sec__in{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.sec__rail{position:relative}
+.sec__rail::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--trace)}
+.sec__rail::after{
+  content:"";position:absolute;left:4px;top:calc(var(--pad) + .35rem);
+  width:16px;height:16px;border-radius:50%;
+  background:var(--paper);border:3px solid var(--accent);
+}
+.sec__tag{
+  position:absolute;left:12px;top:calc(var(--pad) + 3.1rem);
+  transform-origin:0 0;transform:rotate(90deg);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-soft);white-space:nowrap;
+}
+.sec__body{padding-block:var(--pad)}
+
+.sec--dark,.sec--deep,.ft{--accent:var(--accent-lift);--accent-deep:var(--accent-lift);--trace:var(--trace-dark)}
+.sec--dark{background:var(--ink);color:var(--on-dark)}
+.sec--deep{background:var(--ink-deep);color:var(--on-dark)}
+.sec--tint{background:var(--paper-tint)}
+.sec--dark .sec__rail::after{background:var(--ink)}
+.sec--deep .sec__rail::after{background:var(--ink-deep)}
+.sec--tint .sec__rail::after{background:var(--paper-tint)}
+.sec--dark .sec__tag,.sec--deep .sec__tag{color:var(--on-dark-dim)}
+
+/* ================= header ================= */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(250,251,253,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr__in{display:flex;align-items:center;gap:1.4rem;min-height:78px}
+/* TODO: horizontal lockup here — navy + blue on transparent reads correctly
+   on this light header. The dark footer needs the reversed/white mark. */
+.hdr__logo img{display:block;height:36px;width:auto}
+.nav{display:flex;gap:1.7rem;margin-left:auto}
+.nav a{text-decoration:none;font-size:.95rem;font-weight:500;padding-block:.3rem;border-bottom:2px solid transparent;transition:border-color .18s}
+.nav a:hover{border-bottom-color:var(--accent)}
+.hdr__side{display:flex;align-items:center;gap:1.1rem}
+.portal{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+.portal:hover{color:var(--accent-deep)}
+.tel{font-family:var(--mono);font-size:.9rem;text-decoration:none;white-space:nowrap}
+.tel:hover{color:var(--accent-deep)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--body);font-weight:600;font-size:.96rem;line-height:1;
+  padding:.95rem 1.55rem;border:2px solid var(--accent);background:var(--accent);color:#fff;
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background .18s,border-color .18s;
+}
+.btn:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn--ghost:hover{background:transparent;border-color:var(--ink)}
+.btn--sm{padding:.68rem 1.1rem;font-size:.88rem}
+.burger{display:none;background:none;border:1px solid var(--line-strong);padding:.55rem .7rem;cursor:pointer;color:inherit}
+
+/* ================= hero ================= */
+.hero{background:linear-gradient(180deg,var(--paper-tint),var(--paper));border-bottom:1px solid var(--line)}
+.hero .sec__body{padding-block:clamp(3rem,7vw,5.4rem) clamp(2rem,4vw,3rem)}
+.hero__kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep);margin:0 0 1.5rem}
+.hero h1{max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero__cols{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:end;margin-top:2.2rem}
+.hero__lede{font-size:clamp(1.06rem,1rem + .45vw,1.3rem);color:var(--ink-soft);margin:0}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero__fine{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--ink-soft);margin:1.3rem 0 0}
+
+/* converging bus — five service terminals feeding one hub.
+   PCB-style routing: each line drops, chamfers 45° onto a shared bus,
+   and the bus feeds the TEKNIK chip. Labels sit ABOVE their tiles, so
+   nothing clips at any width. */
+.bus{width:100%;height:auto;display:block;margin-top:clamp(2rem,4vw,3.2rem);overflow:visible}
+.bus .grid{fill:var(--accent);opacity:.18}
+.bus .t{fill:none;stroke:var(--trace);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.bus .t--bus{stroke-width:3}
+.bus .via{fill:var(--paper);stroke:var(--accent);stroke-width:2}
+.bus .tile{fill:var(--paper-lift);stroke:var(--line-strong);stroke-width:1.5;transition:stroke .18s}
+.bus .ico{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s}
+.bus .ico--dot{stroke-width:2.6}
+.bus .lbl{font-family:var(--mono);font-size:13px;fill:var(--ink-soft);letter-spacing:.1em;transition:fill .18s}
+.bus a{cursor:pointer;outline:none}
+.bus a:hover .tile,.bus a:focus-visible .tile{stroke:var(--accent);stroke-width:2}
+.bus a:hover .ico,.bus a:focus-visible .ico{stroke:var(--accent-deep)}
+.bus a:hover .lbl,.bus a:focus-visible .lbl{fill:var(--accent-deep)}
+.bus .hub-ring{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:.35}
+.bus .hub-chip{fill:var(--ink)}
+.bus .hub{font-family:var(--display);font-size:15px;font-weight:700;fill:#fff;letter-spacing:.16em}
+.bus .cap{font-family:var(--mono);font-size:11px;fill:var(--ink-soft);letter-spacing:.22em}
+.bus .pkt{fill:var(--accent)}
+@media (prefers-reduced-motion:no-preference){
+  .bus .t{stroke-dasharray:420;stroke-dashoffset:420;animation:trace 1.3s cubic-bezier(.4,0,.2,1) forwards}
+  .bus .t:nth-child(2){animation-delay:.08s}.bus .t:nth-child(3){animation-delay:.16s}
+  .bus .t:nth-child(4){animation-delay:.08s}.bus .t:nth-child(5){animation-delay:0s}
+  .bus .t--bus{animation-delay:.45s}.bus .t--stub{animation-delay:.85s}
+}
+@media (prefers-reduced-motion:reduce){.bus .pkt{display:none}}
+@keyframes trace{to{stroke-dashoffset:0}}
+
+.lede{font-size:clamp(1.05rem,1rem + .35vw,1.24rem);color:var(--ink-soft);max-width:60ch;margin-top:1.5rem}
+.sec--dark .lede,.sec--deep .lede{color:var(--on-dark-dim)}
+.measure{max-width:62ch}
+
+/* ================= services: spec-sheet rows ================= */
+.rack{margin-top:clamp(2.2rem,4vw,3.4rem);border-top:1px solid var(--line-strong)}
+.rack__row{
+  display:grid;grid-template-columns:5rem minmax(0,1fr) minmax(0,1.55fr) auto;
+  gap:1.5rem;align-items:baseline;
+  padding:1.6rem 0 1.5rem;border-bottom:1px solid var(--line);
+  transition:background .18s;
+}
+.rack__row:hover{background:var(--paper-lift)}
+.rack__id{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--accent-deep);display:flex;align-items:center;gap:.5rem}
+.rack__id::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.rack__row p{margin:0;color:var(--ink-soft);font-size:.98rem}
+.rack__go{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-decoration:none;color:var(--accent-deep);white-space:nowrap}
+.rack__go:hover{text-decoration:underline}
+
+/* ================= compliance ================= */
+.cmp{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(2rem,5vw,4rem)}
+.fw{list-style:none;padding:0;margin:2.2rem 0 0;border-top:1px solid var(--line-dark)}
+.fw li{display:flex;align-items:baseline;gap:1.1rem;flex-wrap:wrap;padding:.9rem 0;border-bottom:1px solid var(--line-dark)}
+.fw b{font-family:var(--display);font-size:1.45rem;font-weight:600;color:#fff;min-width:7rem;letter-spacing:-.01em}
+.fw span{color:var(--on-dark-dim);font-size:.94rem}
+.note{border-left:2px solid var(--accent);padding-left:1.3rem;margin-top:2.2rem;color:var(--on-dark-dim);font-size:.96rem;max-width:60ch}
+
+/* ================= process: routed line ================= */
+.flow{list-style:none;padding:0;margin:clamp(2.4rem,4vw,3.4rem) 0 0;display:grid;grid-template-columns:repeat(4,1fr)}
+.flow li{position:relative;padding:2.3rem 1.7rem 0 0}
+.flow li::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--trace)}
+.flow li:last-child::before{right:1.7rem}
+.flow li::after{content:"";position:absolute;top:-6px;left:0;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--accent)}
+.flow__n{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;color:var(--accent-deep);display:block;margin-bottom:.45rem}
+.flow h3{margin-bottom:.45rem}
+.flow p{font-size:.95rem;color:var(--ink-soft);margin:0}
+
+/* ================= urgent help ================= */
+.help{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-deep);text-decoration:none;font-weight:500;
+}
+.help:hover{text-decoration:underline}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+@media (prefers-reduced-motion:no-preference){
+  .dot{animation:pulse 2.4s ease-out infinite}
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(1,71,255,.55)}
+  70%{box-shadow:0 0 0 9px rgba(1,71,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(1,71,255,0)}
+}
+
+.sos{background:var(--ink-deep);color:var(--on-dark);--pad:1.45rem}
+.sos .dot{background:var(--accent-lift)}
+.sos__in{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 2rem;justify-content:space-between}
+.sos__msg{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-size:clamp(1.02rem,.98rem + .3vw,1.2rem);font-weight:600;color:#fff;margin:0}
+.sos__cta{display:flex;flex-wrap:wrap;gap:.65rem}
+.btn--onDark{background:transparent;color:var(--on-dark);border-color:rgba(226,230,240,.35)}
+.btn--onDark:hover{background:transparent;border-color:#fff;color:#fff}
+
+.rescue{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+.rsteps{list-style:none;counter-reset:s;padding:0;margin:0;border-top:1px solid var(--line-strong)}
+.rsteps li{counter-increment:s;display:grid;grid-template-columns:2.3rem minmax(0,1fr);gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--line)}
+.rsteps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:.78rem;color:var(--accent-deep);padding-top:.2rem}
+.rsteps b{display:block;font-family:var(--display);font-weight:600;font-size:1.06rem;margin-bottom:.15rem}
+.rsteps span{font-size:.95rem;color:var(--ink-soft)}
+.rsteps code{font-family:var(--mono);font-size:.9em;background:var(--paper-tint);padding:.1em .35em}
+.warn{border:1px solid var(--line-strong);border-left:3px solid var(--accent);background:var(--paper-lift);padding:1.25rem 1.35rem;margin-top:1.7rem;font-size:.95rem;color:var(--ink-soft)}
+.warn b{color:var(--ink);font-family:var(--display);font-weight:600;display:block;margin-bottom:.35rem}
+
+/* ================= partners ================= */
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);margin-top:clamp(2.2rem,4vw,3.2rem);padding:0;list-style:none}
+.pgrid li{background:var(--ink);padding:1.6rem 1.4rem;display:flex;flex-direction:column;gap:.45rem;min-height:132px}
+.pgrid b{font-family:var(--display);font-size:1.12rem;font-weight:600;color:#fff;letter-spacing:-.005em}
+.pgrid em{font-style:normal;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.pgrid span{font-size:.9rem;color:var(--on-dark-dim);line-height:1.5}
+
+/* ================= industries ================= */
+.ind{list-style:none;padding:0;margin:2.4rem 0 0;border-top:1px solid var(--line-strong)}
+.ind li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.ind h3{margin:0}
+.ind p{margin:0;color:var(--ink-soft);font-size:.98rem}
+
+/* ================= contact ================= */
+.ctc{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+.form{display:grid;gap:1.05rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1.05rem}
+.field{display:flex;flex-direction:column;gap:.38rem}
+.field label{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.field .req{color:var(--accent-deep)}
+.field input,.field select,.field textarea{
+  font-family:var(--body);font-size:1rem;color:var(--ink);
+  background:var(--paper-lift);border:1px solid var(--line-strong);border-radius:0;
+  padding:.82rem .9rem;width:100%;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.field textarea{min-height:118px;resize:vertical}
+.hp{position:absolute;left:-9999px}
+.formnote{font-size:.88rem;color:var(--ink-soft);margin:0}
+.dl{margin:2.2rem 0 0;display:grid;gap:1.25rem}
+.dl dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.22rem}
+.dl dd{margin:0;font-size:1.08rem;font-weight:500}
+.dl dd a{text-decoration:none;border-bottom:2px solid var(--accent)}
+
+/* ================= footer ================= */
+.ft{background:var(--ink-deep);color:var(--on-dark-dim);padding-block:clamp(3rem,6vw,4.5rem) 1.8rem;font-size:.94rem}
+.ft__grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2.4rem}
+.ft h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark);margin:0 0 1rem;font-weight:500}
+.ft ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.ft a{text-decoration:none}
+.ft a:hover{color:var(--accent)}
+.ft__logo{display:block;width:min(200px,70%);height:auto;margin:0 0 1.2rem}
+.ft__tag{font-family:var(--mono);font-size:.71rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 1.3rem}
+.ft address{font-style:normal;line-height:1.85}
+.ft__base{border-top:1px solid var(--line-dark);margin-top:2.8rem;padding-top:1.4rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;font-size:.85rem}
+
+/* ================= imagery — added with stock revamp =================
+   Photos are 1600px JPEGs served straight from /assets/img/. Every
+   figure uses object-fit:cover so the crop holds at any width, and
+   loading is lazy on everything below the fold. */
+.cmp__figure{margin:0 0 1.6rem;border:1px solid var(--line-dark)}
+.cmp__figure img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;filter:saturate(.9) contrast(1.02)}
+.ind li{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.6fr)}
+.ind__fig{margin:0;position:relative;overflow:hidden;border:1px solid var(--line)}
+.ind__fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.ind li:hover .ind__fig img{transform:scale(1.03)}
+.rescue{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.rescue__fig{margin:0;border:1px solid var(--line-strong);position:relative;overflow:hidden}
+.rescue__fig img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.rescue__fig::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(0deg,rgba(25,28,39,.55),transparent);pointer-events:none}
+.rescue__fig figcaption{position:absolute;left:1rem;bottom:.9rem;color:#fff;font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.ctc__banner{margin:0 0 clamp(1.6rem,3vw,2.4rem);position:relative;overflow:hidden;border:1px solid var(--line-strong)}
+.ctc__banner img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover;object-position:center 60%}
+.ctc__banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(44,47,62,.28),transparent 55%);pointer-events:none}
+.ctc__banner figcaption{position:absolute;left:clamp(1rem,3vw,2rem);bottom:clamp(.8rem,2vw,1.4rem);color:#fff;font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+@media (max-width:1000px){
+  .cmp__figure img{aspect-ratio:16/9}
+  .ind li{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+  .ind__fig{grid-row:1/3;grid-column:1}
+  .ind li h3,.ind li p{grid-column:2}
+  .rescue{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .ind li{grid-template-columns:1fr}
+  .ind__fig{grid-row:auto;grid-column:auto;margin-bottom:.6rem}
+  .ind li h3,.ind li p{grid-column:auto}
+  .ctc__banner img{aspect-ratio:16/9}
+}
+
+.ph{background:rgba(232,181,74,.3);border-bottom:1px dashed #8A6318;padding:0 .25em;font-style:normal}
+
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+  .rv.in{opacity:1;transform:none}
+}
+
+/* ================= responsive ================= */
+/* ---- header overflow guards ------------------------------------------
+   The nav carries its own "Book a free assessment" button for the mobile
+   drawer. On desktop the header-side button is the CTA, so the nav copy
+   must stay hidden — rendering both overflowed the header at 1024–1440.
+   ---------------------------------------------------------------------- */
+.hdr__in{flex-wrap:nowrap;min-width:0}
+.hdr__logo{flex:none}
+.nav{flex:0 1 auto;min-width:0}
+.hdr__side{flex:none}
+.nav > .btn{display:none}
+
+/* nav items must never wrap mid-label */
+.nav a{white-space:nowrap}
+
+/* The header row is logo + nav + side cluster. It inherits .wrap's 1240px
+   cap, so a wider viewport gave it no extra room — the nav shrank and its
+   nowrap links spilled over the side cluster. Two fixes:
+     1. the header gets its own, wider cap so large screens actually help;
+     2. the nav no longer shrinks, so links can never spill.
+   "Client portal" leaves the header (it is still in the drawer, the Get
+   help section and the footer) and "Get help now" appears only once there
+   is genuinely room for it. */
+.hdr__in{max-width:1440px}
+.nav{flex:0 0 auto}
+.portal{display:none}
+.help{display:none}
+@media (min-width:1460px){ .help{display:inline-flex} }
+
+@media (max-width:1280px){
+  .nav{gap:1rem}
+  .nav a{font-size:.92rem}
+  .hdr__in{gap:1.1rem}
+}
+
+@media (max-width:1000px){
+  .hero__cols,.cmp,.ctc{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow li{padding-right:1.4rem;padding-bottom:1.8rem}
+  .ft__grid{grid-template-columns:1fr 1fr}
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  :root{--rail:0px}
+  .sec__in{grid-template-columns:minmax(0,1fr)}
+  .sec__rail{display:none}
+  .rack__row{grid-template-columns:minmax(0,1fr);gap:.45rem;align-items:start}
+  .ind li{grid-template-columns:minmax(0,1fr);gap:.45rem}
+  .bus{display:none}
+  /* the Get help section was a hard 1fr 1fr at every width, which
+     overflowed the viewport below ~460px */
+  .rescue{grid-template-columns:minmax(0,1fr);gap:2rem}
+}
+@media (max-width:1160px){
+  .nav{display:none;position:absolute;top:78px;left:0;right:0;background:var(--paper);
+       flex-direction:column;gap:0;padding:.4rem var(--gut) 1.2rem;border-bottom:1px solid var(--line);
+       box-shadow:0 14px 26px rgba(44,47,62,.09)}
+  .nav.open{display:flex}
+  .nav a{padding-block:.85rem;border-bottom:1px solid var(--line);font-size:.95rem}
+  /* inside the drawer the CTA comes back */
+  .nav > .btn{display:inline-flex;margin-top:1rem;align-self:flex-start;border-bottom:0}
+  .burger{display:block;order:3}
+  .portal,.hdr__side .btn{display:none}
+  .hdr__side{gap:.85rem}
+}
+@media (max-width:620px){
+  .hdr__logo img{height:30px}
+  .hdr__in{gap:.75rem}
+}
+@media (max-width:480px){
+  /* the phone number is the priority here; "Get help now" lives in the
+     drawer and in the #help section, so it can go */
+  .help{display:none}
+  .hdr__logo img{height:26px}
+}
+@media (max-width:360px){
+  .hdr__logo img{height:23px}
+  .hdr__in{gap:.5rem}
+  .hdr__side{gap:.5rem}
+  .tel{font-size:.8rem}
+  .burger{padding:.45rem .55rem}
+}
+@media (max-width:560px){
+  .row2,.flow{grid-template-columns:minmax(0,1fr)}
+  .ft__grid{grid-template-columns:minmax(0,1fr)}
+  .pgrid{grid-template-columns:minmax(0,1fr)}
+  .pgrid li{min-height:0}
+  .fw b{min-width:0;width:100%}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tnbcg.tech/#org",
+      "name": "TEKNIK",
+      "url": "https://tnbcg.tech/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tnbcg.tech/assets/logo-teknik.png",
+        "width": 780,
+        "height": 140
+      },
+      "image": "https://tnbcg.tech/assets/og-image.png",
+      "slogan": "Where solutions connect",
+      "email": "info@tnbcg.com",
+      "telephone": "+1-305-419-9992",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1-305-419-9992",
+          "email": "info@tnbcg.com",
+          "contactType": "customer support",
+          "areaServed": "US",
+          "availableLanguage": [
+            "English",
+            "Spanish"
+          ]
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://tnbcg.tech/#business",
+      "name": "TEKNIK",
+      "parentOrganization": {
+        "@id": "https://tnbcg.tech/#org"
+      },
+      "url": "https://tnbcg.tech/",
+      "telephone": "+1-305-419-9992",
+      "email": "info@tnbcg.com",
+      "image": "https://tnbcg.tech/assets/og-image.png",
+      "description": "Managed IT, backup and disaster recovery, Microsoft 365, cybersecurity and compliance for regulated businesses. Remote-first with nationwide on-site coverage.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "knowsAbout": [
+        "Managed IT services",
+        "Backup and disaster recovery",
+        "Microsoft 365",
+        "Cybersecurity",
+        "HIPAA compliance",
+        "PCI-DSS",
+        "SOC 2",
+        "CMMC",
+        "NIST 800-171"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Managed IT",
+              "description": "Monitoring, patching, helpdesk and day-to-day systems management."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Backup & recovery",
+              "description": "Local and cloud backups, configured properly and tested regularly."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Microsoft 365",
+              "description": "Deployment, migration and security hardening."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cybersecurity",
+              "description": "EDR, firewall management, vulnerability scanning, penetration testing and training."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Compliance",
+              "description": "HIPAA, PCI-DSS, SOC 1, SOC 2 and CMMC readiness and evidence."
+            }
+          }
+        ]
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tnbcg.tech/#website",
+      "url": "https://tnbcg.tech/",
+      "name": "TEKNIK",
+      "publisher": {
+        "@id": "https://tnbcg.tech/#org"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="/" aria-label="TEKNIK home">
+      <img src="/assets/logo-teknik.png" alt="TEKNIK — where solutions connect" width="780" height="140">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#industries">Industries</a>
+      <a href="#partners">Partners</a>
+      <a href="/tools/">Free tools</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn--sm" href="#contact">Book a free assessment</a>
+    </nav>
+
+    <div class="hdr__side">
+      <a class="help" href="#help"><span class="dot" aria-hidden="true"></span>Get help now</a>
+      <!-- Client portal: swap #contact for the branded FlexPoint URL when live -->
+      <a class="portal" href="#contact" rel="noopener">Client portal</a>
+      <a class="tel" href="tel:+13054199992">305-419-9992</a>
+      <a class="btn btn--sm" href="#contact">Book a free assessment</a>
+    </div>
+
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.7"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ==================== HERO ==================== -->
+<section class="sec hero">
+  <div class="sec__in">
+    <div class="sec__rail" aria-hidden="true"></div>
+    <div class="sec__body">
+      <p class="hero__kicker">Miami-based · Nationwide coverage</p>
+      <h1>Managed IT and compliance, <em>connected.</em></h1>
+
+      <div class="hero__cols">
+        <p class="hero__lede">We keep your systems running, your data backed up, and your business ready for whatever your auditor asks next. Backups, Microsoft&nbsp;365, cybersecurity, and compliance — from one team that picks up the phone.</p>
+        <div>
+          <div class="hero__cta">
+            <a class="btn" href="#contact">Book a free assessment</a>
+            <a class="btn btn--ghost" href="tel:+13054199992">305-419-9992</a>
+          </div>
+          <p class="hero__fine">No cost. No obligation. You keep the findings.</p>
+        </div>
+      </div>
+
+      <!-- Five service terminals feeding one hub. PCB-style routing:
+           drop → 45° chamfer → shared bus → TEKNIK chip.
+           Labels sit ABOVE their tiles, centred — nothing clips at any width. -->
+      <svg class="bus" viewBox="0 0 1000 392" role="group"
+           aria-label="Diagram: managed IT, backup and recovery, Microsoft 365, cybersecurity and compliance all feeding a single TEKNIK team.">
+        <defs>
+          <pattern id="bus-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle class="grid" cx="1" cy="1" r="1"/></pattern>
+          <radialGradient id="bus-fade" cx="50%" cy="55%" r="58%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+          <mask id="bus-mask"><rect width="1000" height="392" fill="url(#bus-fade)"/></mask>
+          <filter id="bus-sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#2C2F3E" flood-opacity=".14"/></filter>
+          <path id="bus-r1" d="M100 123V160L145 205H500V232"/>
+          <path id="bus-r2" d="M300 123V160L345 205H500V232"/>
+          <path id="bus-r3" d="M500 123V232"/>
+          <path id="bus-r4" d="M700 123V160L655 205H500V232"/>
+          <path id="bus-r5" d="M900 123V160L855 205H500V232"/>
+        </defs>
+
+        <rect width="1000" height="392" fill="url(#bus-dots)" mask="url(#bus-mask)"/>
+
+        <g class="traces">
+          <path class="t" d="M100 123V160L145 205"/>
+          <path class="t" d="M300 123V160L345 205"/>
+          <path class="t" d="M500 123V205"/>
+          <path class="t" d="M700 123V160L655 205"/>
+          <path class="t" d="M900 123V160L855 205"/>
+          <path class="t t--bus" d="M500 205H145"/>
+          <path class="t t--bus" d="M500 205H855"/>
+          <path class="t t--stub" d="M500 205V232"/>
+        </g>
+        <circle class="via" cx="145" cy="205" r="4.5"/>
+        <circle class="via" cx="345" cy="205" r="4.5"/>
+        <circle class="via" cx="500" cy="205" r="4.5"/>
+        <circle class="via" cx="655" cy="205" r="4.5"/>
+        <circle class="via" cx="855" cy="205" r="4.5"/>
+
+        <circle class="pkt" r="3.5"><animateMotion dur="2.4s" begin="1.5s" repeatCount="indefinite"><mpath href="#bus-r1"/></animateMotion></circle>
+        <circle class="pkt" r="3.5"><animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#bus-r2"/></animateMotion></circle>
+        <circle class="pkt" r="3.5"><animateMotion dur="2.4s" begin="2.7s" repeatCount="indefinite"><mpath href="#bus-r3"/></animateMotion></circle>
+        <circle class="pkt" r="3.5"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite"><mpath href="#bus-r4"/></animateMotion></circle>
+        <circle class="pkt" r="3.5"><animateMotion dur="2.4s" begin="2.4s" repeatCount="indefinite"><mpath href="#bus-r5"/></animateMotion></circle>
+
+        <a href="#services" aria-label="Managed IT">
+          <text class="lbl" x="100" y="44" text-anchor="middle">MANAGED IT</text>
+          <rect class="tile" x="70" y="63" width="60" height="60" rx="14" filter="url(#bus-sh)"/>
+          <g class="ico" transform="translate(88 81)"><rect x="3" y="3.5" width="18" height="7" rx="1.6"/><rect x="3" y="13.5" width="18" height="7" rx="1.6"/><path class="ico--dot" d="M7 7h.01M7 17h.01"/><path d="M11 7h7M11 17h7"/></g>
+        </a>
+        <a href="#services" aria-label="Backup and disaster recovery">
+          <text class="lbl" x="300" y="44" text-anchor="middle">BACKUP + DR</text>
+          <rect class="tile" x="270" y="63" width="60" height="60" rx="14" filter="url(#bus-sh)"/>
+          <g class="ico" transform="translate(288 81)"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 3.5v3.8h-3.8"/><path d="M12 8v4.3l2.8 1.7"/></g>
+        </a>
+        <a href="#services" aria-label="Microsoft 365">
+          <text class="lbl" x="500" y="44" text-anchor="middle">MICROSOFT 365</text>
+          <rect class="tile" x="470" y="63" width="60" height="60" rx="14" filter="url(#bus-sh)"/>
+          <g class="ico" transform="translate(488 81)"><rect x="3.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.4"/></g>
+        </a>
+        <a href="#services" aria-label="Cybersecurity">
+          <text class="lbl" x="700" y="44" text-anchor="middle">SECURITY</text>
+          <rect class="tile" x="670" y="63" width="60" height="60" rx="14" filter="url(#bus-sh)"/>
+          <g class="ico" transform="translate(688 81)"><path d="M12 3l7.5 3v5.4c0 4.7-3.2 8.1-7.5 9.6-4.3-1.5-7.5-4.9-7.5-9.6V6z"/><path d="M8.8 12.1l2.2 2.2 4.4-4.6"/></g>
+        </a>
+        <a href="#services" aria-label="Compliance">
+          <text class="lbl" x="900" y="44" text-anchor="middle">COMPLIANCE</text>
+          <rect class="tile" x="870" y="63" width="60" height="60" rx="14" filter="url(#bus-sh)"/>
+          <g class="ico" transform="translate(888 81)"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8.7 13.2l2 2 4.4-4.6"/><path d="M9 18h6"/></g>
+        </a>
+
+        <rect class="hub-ring" x="432" y="222" width="136" height="136" rx="26"/>
+        <rect class="hub-chip" x="442" y="232" width="116" height="116" rx="20" filter="url(#bus-sh)"/>
+        <image href="/assets/mark-white.png" x="469" y="244" width="62" height="62" aria-hidden="true"/>
+        <text class="hub" x="500" y="332" text-anchor="middle">TEKNIK</text>
+        <text class="cap" x="500" y="382" text-anchor="middle">ONE TEAM · ONE NUMBER</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== URGENT STRIP ==================== -->
+<section class="sec sos">
+  <div class="sec__in">
+    <div class="sec__rail" aria-hidden="true"></div>
+    <div class="sec__body">
+      <div class="sos__in">
+        <p class="sos__msg"><span class="dot" aria-hidden="true"></span>Systems down, or something looks wrong right now?</p>
+        <div class="sos__cta">
+          <a class="btn" href="tel:+13054199992">Call 305-419-9992</a>
+          <a class="btn btn--onDark" href="#help">Start a remote session</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section class="sec" id="services">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">01 — Services</span></div>
+    <div class="sec__body">
+      <h2 class="rv">Everything your IT needs,<br>under one roof</h2>
+      <p class="lede rv">Most businesses end up with three or four vendors: one for the network, one for backups, one for Microsoft&nbsp;365, and a consultant who appears at audit time. Nobody owns the whole picture, and the gaps between them are where problems live.</p>
+
+      <div class="rack rv">
+        <div class="rack__row">
+          <span class="rack__id">MSP</span>
+          <h3>Managed IT</h3>
+          <p>Monitoring, patching, helpdesk, and the day-to-day work of keeping systems healthy. We're your IT department, or backup for the one you have — remote-first, with on-site hands wherever your offices are.</p>
+          <a class="rack__go" href="#contact">DETAILS →</a>
+        </div>
+        <div class="rack__row">
+          <span class="rack__id">BDR</span>
+          <h3>Backup &amp; recovery</h3>
+          <p>Local and cloud backups, configured properly and tested regularly, so recovery is a procedure rather than a hope.</p>
+          <a class="rack__go" href="#contact">DETAILS →</a>
+        </div>
+        <div class="rack__row">
+          <span class="rack__id">M365</span>
+          <h3>Microsoft 365</h3>
+          <p>Deployment, migration, and security hardening. Most tenants run on default settings that were never meant to be a security posture.</p>
+          <a class="rack__go" href="#contact">DETAILS →</a>
+        </div>
+        <div class="rack__row">
+          <span class="rack__id">SEC</span>
+          <h3>Cybersecurity</h3>
+          <p>Endpoint detection and response, firewall management, vulnerability scanning, penetration testing, and training for the people who click the links. Backed by a 24/7 security operations center.</p>
+          <a class="rack__go" href="#contact">DETAILS →</a>
+        </div>
+        <div class="rack__row">
+          <span class="rack__id">GRC</span>
+          <h3>Compliance</h3>
+          <p>HIPAA, PCI-DSS, SOC&nbsp;1, SOC&nbsp;2, and CMMC. Controls implemented, evidence collected, auditors answered.</p>
+          <a class="rack__go" href="#compliance">DETAILS →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPLIANCE ==================== -->
+<section class="sec sec--dark" id="compliance">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">02 — Compliance</span></div>
+    <div class="sec__body">
+      <div class="cmp">
+        <div class="rv">
+          <h2 style="color:#fff">Compliance isn't something we bolt on afterward</h2>
+          <ul class="fw">
+            <li><b>HIPAA</b><span>Security Rule safeguards, risk analysis, PHI access control</span></li>
+            <li><b>PCI-DSS</b><span>Scope reduction, segmentation, SAQ and QSA preparation</span></li>
+            <li><b>SOC 1</b><span>Controls over systems affecting client financial reporting</span></li>
+            <li><b>SOC 2</b><span>Security, availability, confidentiality and privacy controls</span></li>
+            <li><b>CMMC</b><span>Level 1 practices, with Level 2 readiness work</span></li>
+          </ul>
+        </div>
+        <div class="rv">
+          <figure class="cmp__figure">
+            <img src="/assets/img/compliance-rack.jpg" alt="Managed server rack in a data center, network cabling running to a switch." loading="lazy" decoding="async" width="1200" height="1600">
+          </figure>
+          <p>Here's a pattern we see often. A company hires an IT provider, everything works fine, and then an auditor arrives and asks for twelve months of access reviews. Nobody was collecting them. Audit logging was never enabled. The backups were configured but never tested.</p>
+          <p>None of that was negligence exactly. It's that compliance was treated as a separate project from IT, when it's really a set of requirements about how IT should have been built in the first place.</p>
+          <p>We work the other way around. If HIPAA, PCI-DSS, SOC&nbsp;2, or CMMC applies to you, that shapes your environment from day one — which means audit season becomes a document request instead of a scramble.</p>
+          <p class="note">We're not an audit firm and we don't issue certifications. SOC reports come from licensed CPA firms; CMMC Level&nbsp;2 certification comes from an accredited third-party assessor. Our job is everything that has to be true before those people arrive, plus standing beside you while they're there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROCESS ==================== -->
+<section class="sec" id="process">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">03 — Process</span></div>
+    <div class="sec__body">
+      <h2 class="rv">What working with us looks like</h2>
+      <ol class="flow rv">
+        <li>
+          <span class="flow__n">STEP 01</span>
+          <h3>Assessment</h3>
+          <p>We review your infrastructure, backups, Microsoft&nbsp;365 configuration, security posture, and where you stand against any framework that applies. Free, and you keep the findings either way.</p>
+        </li>
+        <li>
+          <span class="flow__n">STEP 02</span>
+          <h3>Roadmap</h3>
+          <p>A prioritized plan separating urgent from important from later, with costs attached so you can budget properly.</p>
+        </li>
+        <li>
+          <span class="flow__n">STEP 03</span>
+          <h3>Onboarding</h3>
+          <p>We document your environment, deploy monitoring and endpoint protection, and take over support. Typically two to three weeks.</p>
+        </li>
+        <li>
+          <span class="flow__n">STEP 04</span>
+          <h3>Ongoing</h3>
+          <p>Monitoring, patching, helpdesk, and quarterly reviews where we walk you through what changed and what's coming.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INDUSTRIES ==================== -->
+<section class="sec sec--tint" id="industries">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">04 — Industries</span></div>
+    <div class="sec__body">
+      <h2 class="rv">Who we work with</h2>
+      <ul class="ind rv">
+        <li>
+          <figure class="ind__fig"><img src="/assets/img/industry-healthcare.jpg" alt="Physician reviewing an MRI scan on a tablet in a clinical office." loading="lazy" decoding="async" width="1600" height="1200"></figure>
+          <h3>Healthcare</h3>
+          <p>Practices, clinics, and billing companies handling protected health information under HIPAA.</p>
+        </li>
+        <li>
+          <figure class="ind__fig"><img src="/assets/img/industry-professional.jpg" alt="Three professionals collaborating around a table in a modern office." loading="lazy" decoding="async" width="1600" height="1200"></figure>
+          <h3>Financial &amp; professional services</h3>
+          <p>Firms with SOC&nbsp;1 or SOC&nbsp;2 obligations, PCI-DSS scope, or client data they're accountable for.</p>
+        </li>
+        <li>
+          <figure class="ind__fig"><img src="/assets/img/industry-defense.jpg" alt="Two engineers in high-visibility vests inspecting components on a manufacturing floor." loading="lazy" decoding="async" width="1600" height="1200"></figure>
+          <h3>Defense contractors</h3>
+          <p>Suppliers who need CMMC and NIST 800-171 controls in place to hold their contracts.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PARTNERS ==================== -->
+<section class="sec sec--dark" id="partners">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">05 — Partners</span></div>
+    <div class="sec__body">
+      <h2 class="rv" style="color:#fff">The platforms behind the service</h2>
+      <p class="lede rv">We're deliberate about what we build on. Every platform here was chosen because it holds up in regulated environments, because it's well supported, and because we'd rather go deep on a few than shallow on many. We hold active partnerships with all of them.</p>
+
+      <!-- TODO: swap each <b> for the vendor's white logo <img>. You already have
+           these as a white-on-dark strip, which is why this band is dark.
+           Confirm each vendor's brand guidelines before publishing their mark. -->
+      <ul class="pgrid rv">
+        <li><em>Licensing</em><b>Microsoft</b><span>Cloud Solution Provider. Microsoft&nbsp;365 and Azure licensing, deployment and tenant management.</span></li>
+        <li><em>Hardware</em><b>Dell Technologies</b><span>Workstations, servers and infrastructure, procured and lifecycle-managed.</span></li>
+        <li><em>Hardware</em><b>Lenovo</b><span>Endpoint fleet supply and standardized device builds.</span></li>
+        <li><em>Compliance</em><b>Vanta</b><span>Continuous control monitoring and evidence collection for SOC&nbsp;2, HIPAA and beyond.</span></li>
+        <li><em>Threat detection</em><b>Huntress</b><span>Managed endpoint detection and response, with human-reviewed threat analysis.</span></li>
+        <li><em>Backup</em><b>Cove Data Protection</b><span>Cloud-first backup for servers, workstations and Microsoft&nbsp;365.</span></li>
+        <li><em>XDR</em><b>Cynet</b><span>Extended detection and response across endpoints, users and network.</span></li>
+        <li><em>24/7 SOC</em><b>Arctic Wolf</b><span>Round-the-clock security operations with a named concierge security team.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GET HELP ==================== -->
+<section class="sec" id="help">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">06 — Get help</span></div>
+    <div class="sec__body">
+      <h2 class="rv">Need help right now?</h2>
+      <p class="lede rv">Call us first and we'll get on your screen in a couple of minutes. You don't have to be an existing client — if something is broken and you need hands on it today, start here.</p>
+
+      <div class="rescue rv" style="margin-top:clamp(2.2rem,4vw,3.2rem)">
+        <figure class="rescue__fig">
+          <img src="/assets/img/help-remote.jpg" alt="Desk with a laptop and a phone — the setup for a call-first remote session." loading="lazy" decoding="async" width="1600" height="900">
+          <figcaption>Call first · we connect fast</figcaption>
+        </figure>
+        <div>
+          <ol class="rsteps">
+            <li>
+              <div><b>Call 305-419-9992</b><span>Talk to a technician first. This is always step one.</span></div>
+            </li>
+            <li>
+              <div><b>Go to sos.splashtop.com</b><span>Open it in any browser. A small file downloads — run it. Nothing installs permanently.</span></div>
+            </li>
+            <li>
+              <div><b>Read us your 9-digit code</b><span>The app shows a code like <code>123 456 789</code>. Say it to the technician on the phone.</span></div>
+            </li>
+            <li>
+              <div><b>Watch the whole session</b><span>You see everything we do, and you can end the session at any moment by closing the app.</span></div>
+            </li>
+          </ol>
+
+          <div class="sos__cta" style="margin-top:1.7rem">
+            <a class="btn" href="tel:+13054199992">Call 305-419-9992</a>
+            <a class="btn btn--ghost" href="https://sos.splashtop.com" target="_blank" rel="noopener noreferrer">Open sos.splashtop.com</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="warn">
+            <b>How to know it's really us</b>
+            <p style="margin:0 0 .8em">Asking someone to download a remote access tool is exactly what tech-support scammers do. So we hold to two rules, and you should hold us to them:</p>
+            <p style="margin:0 0 .8em"><strong>We will never call you out of the blue</strong> and ask you to run this. A remote session only ever happens after <em>you</em> have contacted <em>us</em>.</p>
+            <p style="margin:0">If someone claiming to be from TEKNIK calls you unprompted about a virus, an expiring licence, or a refund, hang up and call us on 305-419-9992. That number is the one on this site and on your invoices.</p>
+          </div>
+
+          <p style="margin-top:1.7rem;color:var(--ink-soft);font-size:.95rem">Already a client with an urgent issue? Use your normal support line or the <a href="#contact" rel="noopener" style="border-bottom:2px solid var(--accent);text-decoration:none">client portal</a> so your ticket is logged against your account.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="sec sec--tint" id="contact">
+  <div class="sec__in">
+    <div class="sec__rail"><span class="sec__tag">07 — Contact</span></div>
+    <div class="sec__body">
+      <figure class="ctc__banner rv">
+        <img src="/assets/img/contact-miami.jpg" alt="Downtown Miami skyline seen across Biscayne Bay." loading="lazy" decoding="async" width="1600" height="686">
+        <figcaption>Miami, FL · Nationwide coverage</figcaption>
+      </figure>
+      <div class="ctc">
+        <div class="rv">
+          <h2>Let's find out where you stand</h2>
+          <p class="measure" style="margin-top:1.3rem;color:var(--ink-soft)">The assessment is free and takes about 60 minutes. You'll come away with a written picture of your infrastructure, your backups, your security gaps, and your compliance exposure — whatever you decide to do next.</p>
+          <dl class="dl">
+            <div><dt>Call</dt><dd><a href="tel:+13054199992">305-419-9992</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:info@tnbcg.com">info@tnbcg.com</a></dd></div>
+            <div><dt>Coverage</dt><dd>Nationwide — remote-first, on-site when needed</dd></div>
+            <div><dt>Already a client?</dt><dd><a href="#contact" rel="noopener">Client portal</a></dd></div>
+          </dl>
+        </div>
+
+        <!-- Netlify Forms. Honeypot instead of a CAPTCHA. -->
+        <form class="form rv" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+          <div class="row2">
+            <div class="field"><label for="name">Full name <span class="req">*</span></label><input id="name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="email">Work email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="phone">Phone <span class="req">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+            <div class="field"><label for="company">Company <span class="req">*</span></label><input id="company" name="company" type="text" autocomplete="organization" required></div>
+          </div>
+          <div class="field">
+            <label for="topic">What can we help with? <span class="req">*</span></label>
+            <select id="topic" name="topic" required>
+              <option value="">Choose one</option>
+              <option>Managed IT</option>
+              <option>Backup &amp; recovery</option>
+              <option>Microsoft 365</option>
+              <option>Cybersecurity</option>
+              <option>Compliance &amp; audit</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label for="message">Tell us more</label><textarea id="message" name="message"></textarea></div>
+          <button class="btn" type="submit">Send request</button>
+          <p class="formnote">We'll reply within one business day.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft__grid">
+      <div>
+        <!-- TODO: replace with the reversed/white logo — the navy wordmark
+             disappears on this dark ground. -->
+        <img class="ft__logo" src="/assets/logo-teknik-white.png" alt="TEKNIK — where solutions connect" width="780" height="140">
+        <address>
+          Miami-based · nationwide coverage<br>
+          <a href="tel:+13054199992">305-419-9992</a><br>
+          <a href="mailto:info@tnbcg.com">info@tnbcg.com</a><br>
+          Mon–Fri, 8am–5pm ET
+        </address>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Managed IT</a></li>
+          <li><a href="#services">Backup &amp; recovery</a></li>
+          <li><a href="#services">Microsoft 365</a></li>
+          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="#compliance">HIPAA</a></li>
+          <li><a href="#compliance">PCI-DSS</a></li>
+          <li><a href="#compliance">SOC 1 &amp; SOC 2</a></li>
+          <li><a href="#compliance">CMMC</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="/tools/">Free tools</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#help">Get help now</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact" rel="noopener">Client portal</a></li>
+          <li><a href="https://wa.link/9c93ae" rel="noopener" aria-label="Message TEKNIK on WhatsApp">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft__base">
+      <span>© 2026 TEKNIK. All rights reserved.</span>
+      <span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/accessibility/">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Service-area business: no street address published. areaServed is the whole
+     country — see the note about Google Business Profile in the deck. -->
+<script>
+(function(){
+  var b=document.getElementById('burger'),n=document.getElementById('nav');
+  b.addEventListener('click',function(){
+    var open=n.classList.toggle('open');
+    b.setAttribute('aria-expanded',open);
+    b.setAttribute('aria-label',open?'Close menu':'Open menu');
+  });
+  n.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded','false');}
+  });
+
+  var els=document.querySelectorAll('.rv');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -8% 0px',threshold:.04});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

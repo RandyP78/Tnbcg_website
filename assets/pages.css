@@ -1,0 +1,22 @@
+/* TEKNIK — simple content pages (thank-you, 404, legal).
+   Shares the tokens in tools.css; load that first. */
+.page{max-width:70ch;margin-inline:auto;padding-inline:var(--gut);padding-block:clamp(2.6rem,6vw,4.5rem)}
+.page h1{margin-bottom:1.2rem}
+.page h2{margin:2.4rem 0 .8rem;font-size:clamp(1.25rem,1.1rem + .8vw,1.6rem)}
+.page h3{margin:1.6rem 0 .5rem}
+.page ul{padding-left:1.2rem;color:var(--ink-soft)}
+.page li{margin-bottom:.45rem}
+.page table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.95rem}
+.page th,.page td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+.page th{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.updated{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.centered{text-align:center}
+.centered .btn{margin-top:1.6rem}
+.big{font-family:var(--display);font-weight:700;font-size:clamp(4rem,12vw,8rem);line-height:1;color:var(--accent);margin:0 0 .5rem}
+.todo{background:rgba(232,181,74,.3);border-left:3px solid #8A6318;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.94rem}
+.todo b{display:block;margin-bottom:.3rem}
+
+/* Long tables get their own scroll rather than widening the page. */
+.page table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:normal}
+@media (min-width:620px){.page table{display:table}}
+.page{overflow-wrap:anywhere}

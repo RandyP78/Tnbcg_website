@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Compliance Assessment Report — TEKNIK</title>
+<link rel="stylesheet" href="/compliance/app.css">
+<link rel="icon" href="/assets/favicon.ico">
+<script src="/compliance/auth.js"></script>
+<style>
+  body{background:#e9edf2}
+  .doc{max-width:8.5in;margin:24px auto;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  .page{padding:.8in .85in;page-break-after:always}.page:last-child{page-break-after:auto}
+  .cover{min-height:10in;display:flex;flex-direction:column;justify-content:space-between;border-top:14px solid var(--navy)}
+  .cover .brand{letter-spacing:.2em;font-weight:800;color:var(--navy);font-size:1.4rem}.cover .brand small{display:block;letter-spacing:.05em;font-weight:400;font-size:.8rem;color:var(--muted)}
+  .cover h1{font-size:2rem;margin:.4in 0 .1in;color:var(--navy);line-height:1.15}.cover .sub{font-size:1.05rem;color:var(--muted)}
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.92rem;margin-top:.4in}.meta b{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;padding-top:3px}
+  .class{background:#7f1d1d;color:#fff;text-align:center;font-weight:700;letter-spacing:.14em;font-size:.72rem;padding:5px}
+  h2.sec{font-size:1.25rem;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:6px;margin:0 0 14px}h3{font-size:1rem;margin:16px 0 6px;color:var(--navy-2)}
+  p{margin:0 0 10px}.narr p{text-align:justify}
+  .foot{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);padding-top:6px;margin-top:22px}
+  table{font-size:.82rem}th,td{padding:6px 8px}
+  .score-big{display:flex;gap:26px;align-items:center;margin:8px 0 16px}.score-big .n{font-size:3.2rem;font-weight:800;line-height:1}.score-big .g{font-size:1.6rem;font-weight:700}
+  .finding{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0 0 10px;page-break-inside:avoid}.finding .hd{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.finding .hd b{font-size:.95rem}
+  .toolbar{max-width:8.5in;margin:14px auto 0;display:flex;gap:8px;justify-content:flex-end}
+  @media print{body{background:#fff}.doc{box-shadow:none;margin:0;max-width:none}.toolbar{display:none}.page{padding:.5in .6in}@page{size:letter;margin:.4in}}
+</style>
+</head>
+<body>
+<div class="toolbar"><button class="btn secondary" onclick="window.print()">Print / Save as PDF</button></div>
+<div id="app" class="doc"><div class="page">Loading report…</div></div>
+<script>
+(function(){
+  const API='/api/compliance'; const h=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtDay=d=>d?new Date(d).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):'—';
+  const badge=s=>`<span class="badge ${s}">${s==='na'?'N/A':s}</span>`, sev=s=>`<span class="badge ${s}">${s}</span>`;
+  const cites=fw=>Object.entries(fw||{}).filter(([,v])=>v.length).map(([k,v])=>`<b>${k.toUpperCase()}</b> ${h(v.join(', '))}`).join(' · ');
+  const id=new URLSearchParams(location.search).get('id');
+  async function go(){
+    const t=await window.TeknikIdentity.token();
+    if(!t){document.getElementById('app').innerHTML='<div class="page"><h2>Sign in required</h2><p>Open the <a href="/compliance/portal/">compliance portal</a>, sign in, then return to this link.</p></div>';return;}
+    const r=await fetch(`${API}/report/${id}`,{headers:{authorization:'Bearer '+t}});
+    if(!r.ok){const d=await r.json().catch(()=>({}));document.getElementById('app').innerHTML=`<div class="page"><h2>Could not load report</h2><p>${h(d.error||r.statusText)} (${r.status})</p></div>`;return;}
+    render(await r.json());
+  }
+  function render(R){
+    const S=R.score,o=R.org,fw=R.catalog.frameworks; const preparedFor=o.prepared_for||o.name; const rid=R.id.slice(0,8).toUpperCase();
+    const devs=S.technical.devices, autoRows=S.controls.filter(c=>c.type==='automated'), manRows=S.controls.filter(c=>c.type==='manual');
+    const bySev=s=>S.gaps.filter(g=>g.severity===s&&g.status==='fail').length;
+    const foot=(n)=>`<div class="foot"><span>TEKNIK · Compliance Assessment · ${h(preparedFor)}</span><span>Report ${rid} · CONFIDENTIAL · Page ${n}</span></div>`;
+    const roadmap={30:S.gaps.filter(g=>['critical','high'].includes(g.severity)&&g.status!=='warn'),60:S.gaps.filter(g=>g.severity==='medium'||(['critical','high'].includes(g.severity)&&g.status==='warn')),90:S.gaps.filter(g=>g.severity==='low')};
+    const notElevated=devs.filter(d=>d.counts.error>3).map(d=>d.hostname);
+    const deterministicSummary=()=>`This assessment evaluated ${devs.length} workstation${devs.length===1?'':'s'} belonging to ${h(o.name)} against ${S.frameworksInScope.map(f=>fw[f]?.name||f).join(', ')} using ${autoRows.length} automated technical controls and ${manRows.length} administrative, physical, and payment-environment attestations. The organization's overall compliance score is <b>${S.overall.score} (${S.overall.grade})</b>${S.overall.capped?', capped because one or more critical controls are failing':''}. Technical posture scored ${S.technical.score??'—'} and administrative posture scored ${S.administrative.score??'—'} with ${S.administrative.answered} of ${S.administrative.total} attestations completed. ${bySev('critical')} critical and ${bySev('high')} high-severity controls are currently failing. ${S.phi.some(p=>p.identifierFiles>0)?`Data discovery located files containing direct identifiers (SSN, card numbers, MRN, or Medicare IDs) on ${S.phi.filter(p=>p.identifierFiles>0).length} workstation(s); these represent unprotected data at rest and are the highest-priority remediation item.`:'Data discovery did not locate files containing direct patient or cardholder identifiers outside controlled systems.'}`;
+    const page=(n,title,body)=>`<div class="page"><h2 class="sec">${n}. ${title}</h2>${body}${foot(n+1)}</div>`;
+    let html=`<div class="page cover"><div><div class="class">CONFIDENTIAL — SECURITY ASSESSMENT RESULTS — DISTRIBUTION LIMITED TO ${h(o.name).toUpperCase()} AND TEKNIK</div>
+      <div class="brand" style="margin-top:.5in">TEKNIK<small>WHERE SOLUTIONS CONNECT · TNB Consulting Group, LLC</small></div>
+      <h1>Workstation Security &amp; Compliance Assessment</h1><div class="sub">HIPAA Security Rule · PCI DSS v4.0.1 · NIST CSF 2.0 / SP 800-171 · CIS Benchmarks</div>
+      <div class="meta"><b>Prepared for</b><span>${h(preparedFor)}${o.prepared_for?`<br><span class="muted">${h(o.name)}</span>`:''}<br><span class="muted">${h(o.contact_email)}</span></span>
+        <b>Prepared by</b><span>TEKNIK (TNB Consulting Group, LLC)<br><span class="muted">Miami, Florida · 305-419-9992 · helpdesk@tnbcg.com · tnbcg.tech</span></span>
+        <b>Assessor</b><span>${h(R.generated_by)}</span><b>Report date</b><span>${fmtDay(R.generated_at)}</span><b>Report ID</b><span class="mono">${h(R.id)}</span>
+        <b>Scope</b><span>${devs.length} Windows workstation(s); organizational attestations; data-at-rest discovery</span><b>Control catalog</b><span>TEKNIK Unified Control Catalog v${h(R.catalog_version)}</span>
+        <b>Frameworks</b><span>${S.frameworksInScope.map(f=>h(fw[f]?.name||f)).join('; ')}</span></div></div>
+      <div class="score-big"><div><div class="n">${S.overall.score??'—'}</div><div class="muted small">Overall score</div></div><div><div class="g">Grade ${S.overall.grade}</div><div class="muted small">Technical ${S.technical.score??'—'} · Administrative ${S.administrative.score??'—'}</div></div></div></div>`;
+    html+=page(1,'Executive Summary',`<div class="narr">${R.narrative?h(R.narrative).split(/\n{2,}/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join(''):`<p>${deterministicSummary()}</p>`}</div>
+      ${R.narrative?`<p class="small muted">Narrative drafted with ${h(R.narrative_model)} from aggregate scores only and reviewed by the assessor; all findings and scores below are produced deterministically by the TEKNIK scoring engine.</p>`:''}
+      <h3>Scorecard</h3><table><thead><tr><th>Framework</th><th>Score</th><th>Controls</th></tr></thead><tbody>${Object.entries(S.frameworks).map(([k,f])=>`<tr><td>${h(f.name||k)}<div class="muted small">${h(fw[k]?.cite||'')}</div></td><td><b>${f.score??'—'}</b></td><td>${f.controls}</td></tr>`).join('')}</tbody></table>
+      <h3>Domain results</h3><table><thead><tr><th>Domain</th><th>Score</th><th>Controls</th></tr></thead><tbody>${Object.entries(S.domains).map(([k,f])=>`<tr><td>${h(k)}</td><td><b>${f.score??'—'}</b></td><td>${f.controls}</td></tr>`).join('')}</tbody></table>
+      <h3>Failing controls by severity</h3><table><thead><tr><th>Critical</th><th>High</th><th>Medium</th><th>Low</th><th>Unanswered attestations</th></tr></thead><tbody><tr><td>${bySev('critical')}</td><td>${bySev('high')}</td><td>${bySev('medium')}</td><td>${bySev('low')}</td><td>${S.gaps.filter(g=>g.status==='unanswered').length}</td></tr></tbody></table>`);
+    html+=page(2,'Scope, Methodology & Limitations',`<h3>Scope</h3><table><thead><tr><th>Workstation</th><th>Operating system</th><th>Last user</th><th>Score</th><th>Pass / Fail / Warn / Err</th><th>Scanned</th></tr></thead><tbody>${devs.map(d=>`<tr><td><b>${h(d.hostname)}</b></td><td>${h(d.osName||'')}</td><td>${h(d.lastUser||'')}</td><td><b>${d.score??'—'}</b></td><td>${d.counts.pass} / ${d.counts.fail} / ${d.counts.warn} / ${d.counts.error}</td><td>${fmtDay(d.lastSeen)}</td></tr>`).join('')}</tbody></table>
+      <h3>Methodology</h3><p>Technical controls were evaluated by the TEKNIK Compliance Scan Agent executing locally with administrative privileges on each workstation, reading authoritative system state (Windows Security Center, BitLocker, Local Security Policy, Advanced Audit Policy, Windows Firewall, registry policy keys, installed-software inventory, listening services) rather than user-reported configuration. Administrative, physical, and payment-environment controls were attested by the organization through the client portal and are subject to evidence review by TEKNIK.</p>
+      <p>Each control is weighted by severity (critical 10, high 6, medium 3, low 1). A passing control earns full weight, a partial/warning result earns half, a failing or unanswered control earns none, and controls marked not-applicable with an approved justification are excluded. The technical score is the mean of per-workstation scores; the overall score is 60% technical and 40% administrative. Any failing critical control caps the overall score at 69 until remediated. Grade bands: A ≥ 90, B ≥ 80, C ≥ 70, D ≥ 60, F &lt; 60.</p>
+      <p>Data-at-rest discovery inspected user profiles, shared folders, secondary volumes, and temporary locations for Social Security numbers, Luhn-validated payment card numbers, medical record numbers, Medicare Beneficiary Identifiers, NPIs, dates of birth, ICD-10 codes, insurance identifiers, and clinical vocabulary inside text, CSV, Office, PDF, RTF, e-mail, and log files. Only the file name, its full path, size, modified date, owner, and which pattern types matched with their counts were recorded. No fragment of file content was captured, transmitted or stored - not even a masked or truncated sample. Note that a file path may itself contain a patient name, so this section remains confidential client information.</p>
+      <h3>Limitations</h3><p>Point-in-time assessment as of the scan dates above. Controls managed centrally (e.g., Intune, Conditional Access, EDR consoles, e-mail security) are attested rather than directly observed unless their endpoint footprint is detectable. Encrypted, scanned-image, or password-protected documents cannot be inspected for content. ${notElevated.length?`<b>The following workstations were scanned without elevation and several checks could not run: ${notElevated.map(h).join(', ')}.</b> `:''}${S.phi.some(p=>p.timedOut)?'Data discovery reached its time budget on at least one workstation; results for that workstation are partial. ':''}This report does not constitute a legal opinion or a PCI Report on Compliance; it is intended to support the organization's own risk analysis (45 CFR 164.308(a)(1)(ii)(A)) and SAQ completion.</p>`);
+    const findingCard=(c)=>{const per=devs.map(d=>({d,r:S.technical.deviceControls[d.id]?.[c.id]})).filter(x=>x.r);return `<div class="finding"><div class="hd"><div><b>${c.id} · ${h(c.title)}</b><div class="small muted">${h(c.domain)} · ${cites(c.frameworks)}</div></div><div>${sev(c.severity)} ${badge(c.status)}</div></div>
+      <p class="small" style="margin:6px 0">${h(c.description)}</p>
+      ${c.type==='automated'?`<table><thead><tr><th>Workstation</th><th>Result</th><th>Observed</th><th>Expected</th></tr></thead><tbody>${per.map(x=>`<tr><td>${h(x.d.hostname)}</td><td>${badge(x.r.status)}${x.r.source.startsWith('override')?'<div class="small muted">override</div>':''}</td><td class="small">${h(x.r.observed||'')}</td><td class="small">${h(x.r.expected||'')}</td></tr>`).join('')}</tbody></table>`:
+      `<p class="small"><b>Attestation:</b> ${c.answer?`${h(c.answer.answer)} — ${h(c.answer.notes||'no notes')} <span class="muted">(${h(c.answer.answered_by)}, ${fmtDay(c.answer.answered_at)})</span>`:'<i>not answered</i>'}</p>`}
+      ${c.override?`<p class="small"><b>Override:</b> ${h(c.override.status)} — ${h(c.override.justification)} <span class="muted">(${h(c.override.set_by)}${c.override.approved?', approved':''})</span></p>`:''}
+      <p class="small" style="margin:6px 0 0"><b>Remediation:</b> ${h(c.remediation?.summary||'')}${c.remediation?.manual?` <span class="muted">${h(c.remediation.manual)}</span>`:''}</p></div>`;};
+    const order={fail:0,unanswered:1,unscanned:1,error:2,warn:3,pass:4,na:5};
+    const open=S.controls.filter(c=>['fail','warn','error','unanswered','unscanned'].includes(c.status)).sort((a,b)=>order[a.status]-order[b.status]||b.weight-a.weight);
+    html+=page(3,'Detailed Findings — Open Items',open.length?open.map(findingCard).join(''):'<p>No open findings.</p>');
+    html+=page(4,'Data-at-Rest Discovery (PHI / Cardholder Data)',S.phi.length?S.phi.map(p=>`<h3>${h(p.hostname)} ${badge(p.status)}</h3><p class="small">${p.scannedFiles} files inspected · ${p.identifierFiles} with direct identifiers · ${p.flaggedFiles-p.identifierFiles} with probable clinical/insurance content · ${p.skippedLarge} skipped for size · ${p.unreadable} unreadable · ${(p.mailArchives||[]).length} mail archive(s)${p.timedOut?' · <b>partial (time budget)</b>':''}</p>
+      ${(p.top||[]).length?`<table><thead><tr><th>File</th><th>Path</th><th>Owner</th><th>Modified</th><th>Patterns matched</th></tr></thead><tbody>${p.top.slice(0,40).map(f=>`<tr><td class="mono small">${h(f.name||'')}</td><td class="mono small">${h(f.path)}</td><td class="small">${h(f.owner||'')}</td><td class="small">${fmtDay(f.modified)}</td><td class="small">${Object.entries(f.hits||{}).map(([k,n])=>`${k}×${n}`).join(', ')}</td></tr>`).join('')}</tbody></table>`:'<p class="small muted">No files flagged.</p>'}
+      ${(p.mailArchives||[]).length?`<p class="small"><b>Mail archives on local disk:</b> ${p.mailArchives.map(m=>`<span class="mono">${h(m.path)}</span> (${m.sizeMB} MB)`).join('; ')} — local PST/OST files frequently contain ePHI in attachments and should be migrated to the mailbox or encrypted archive.</p>`:''}`).join(''):'<p>No discovery data.</p>');
+    html+=page(5,'Remediation Roadmap',Object.entries(roadmap).map(([days,list])=>`<h3>Within ${days} days — ${list.length} item(s)</h3>${list.length?`<table><thead><tr><th>#</th><th>Control</th><th>Severity</th><th>Affects</th><th>Action</th></tr></thead><tbody>${list.map((g,i)=>`<tr><td>${i+1}</td><td><b>${g.id}</b> ${h(g.title)}</td><td>${sev(g.severity)}</td><td class="small">${g.type==='manual'?'Organization':g.affected.map(h).join(', ')||'—'}</td><td class="small">${h(g.remediation?.summary||'')}</td></tr>`).join('')}</tbody></table>`:'<p class="small muted">None.</p>'}`).join('')+`<p class="small muted" style="margin-top:12px">TEKNIK can execute scriptable items through managed remediation; items marked manual require policy, procurement, or firmware changes.</p>`);
+    html+=page(6,'Administrative, Physical & Payment-Environment Attestations',`<table><thead><tr><th>Control</th><th>Sev</th><th>Answer</th><th>Notes</th><th>Citations</th></tr></thead><tbody>${manRows.map(c=>`<tr><td><b>${c.id}</b> ${h(c.title)}</td><td>${sev(c.severity)}</td><td>${badge(c.status)}</td><td class="small">${h(c.answer?.notes||c.override?.justification||'')}</td><td class="small">${cites(c.frameworks)}</td></tr>`).join('')}</tbody></table>`);
+    html+=page(7,'Overrides, Exceptions & Evidence Register',`<h3>Approved / pending overrides</h3>${(S.controls.filter(c=>c.override).length||S.pendingOverrides.length)?`<table><thead><tr><th>Control</th><th>Status</th><th>Justification</th><th>Set by</th><th>Approval</th></tr></thead><tbody>${S.controls.filter(c=>c.override).map(c=>`<tr><td>${c.id}</td><td>${badge(c.override.status)}</td><td class="small">${h(c.override.justification)}</td><td class="small">${h(c.override.set_by)}</td><td class="small">approved by ${h(c.override.approved_by||'')}</td></tr>`).join('')}${S.pendingOverrides.map(o=>`<tr><td>${o.control_id}</td><td>${badge(o.status)}</td><td class="small">${h(o.justification)}</td><td class="small">${h(o.set_by)}</td><td class="small"><span class="badge pending">pending</span></td></tr>`).join('')}</tbody></table>`:'<p class="small muted">None.</p>'}
+      <h3>Evidence</h3><p class="small muted">Machine-generated evidence bundles (Defender, BitLocker, firewall, audit policy, security policy, account listings, software inventory, listening ports) are captured by the agent on every scan and stored with SHA-256 integrity hashes. Client-supplied evidence is listed in the portal's Evidence register and retained with the report.</p>`);
+    html+=page(8,'Appendix A — Control Crosswalk',`<table><thead><tr><th>ID</th><th>Control</th><th>Type</th><th>Sev</th><th>Status</th><th>HIPAA</th><th>PCI DSS</th><th>CSF 2.0</th><th>800-171</th><th>CIS</th></tr></thead><tbody>${S.controls.map(c=>`<tr><td class="mono">${c.id}</td><td class="small">${h(c.title)}</td><td class="small">${c.type}</td><td>${sev(c.severity)}</td><td>${badge(c.status)}</td><td class="small">${h((c.frameworks.hipaa||[]).join(', '))}</td><td class="small">${h((c.frameworks.pci||[]).join(', '))}</td><td class="small">${h((c.frameworks.csf||[]).join(', '))}</td><td class="small">${h((c.frameworks.n171||[]).join(', '))}</td><td class="small">${h((c.frameworks.cis||[]).join(', '))}</td></tr>`).join('')}</tbody></table>
+      <h3>Definitions</h3><p class="small"><b>Pass</b> — control observed in place. <b>Warn</b> — partially in place or configured below best practice; half credit. <b>Fail</b> — control absent or misconfigured. <b>Error</b> — the check could not execute (usually insufficient privilege); excluded from scoring and flagged as unverified. <b>N/A</b> — excluded with an approved, documented justification. <b>Unanswered</b> — attestation not yet provided; scored as not in place.</p>
+      <p class="small muted">© ${new Date().getFullYear()} TNB Consulting Group, LLC. This document contains confidential security information about ${h(o.name)} and is provided solely for its use in managing regulatory compliance. TEKNIK Unified Control Catalog v${h(R.catalog_version)}; PCI DSS is a registered trademark of PCI Security Standards Council, LLC.</p>`);
+    document.getElementById('app').innerHTML=html; document.title=`Compliance Assessment — ${o.name} — ${fmtDay(R.generated_at)}`;
+  }
+  go();
+})();
+</script>
+</body>
+</html>

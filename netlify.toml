@@ -1,0 +1,159 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# ---------------------------------------------------------------
+# Redirects. Add the full old-to-new URL map here before cutover —
+# pull the existing URL list from Search Console.
+# ---------------------------------------------------------------
+[[redirects]]
+  from = "/home/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-services/"
+  to = "/#services"
+  status = 301
+
+# ---------------------------------------------------------------
+# Security headers. You sell cybersecurity, so your own site should
+# score well at securityheaders.com. Twenty minutes of work.
+#
+# CSP NOTE: 'unsafe-inline' for script-src is here only because the
+# tool pages use inline <script>. When you move to Astro, extract
+# those to files and drop it — inline script is the one weak point
+# in this policy. Run in report-only first and watch the console.
+# ---------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # HSTS — deliberately conservative to start.
+    #
+    # DO NOT add "preload" or raise max-age until tnbcg.tech has been
+    # serving cleanly over HTTPS here for a few weeks. Preload is close to
+    # irreversible: browsers ship the list baked in, so if HTTPS breaks on
+    # any subdomain, visitors get a hard block you cannot lift quickly.
+    # Removal from the preload list takes months.
+    #
+    # Once you are confident, step up to:
+    #   max-age=31536000; includeSubDomains; preload
+    Strict-Transport-Security = "max-age=86400; includeSubDomains"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(self)"
+    Content-Security-Policy = """
+      default-src 'self';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      img-src 'self' data: https:;
+      font-src 'self' https://fonts.gstatic.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      script-src 'self' 'unsafe-inline';
+      connect-src 'self';
+      frame-src https://checkout.stripe.com;
+      object-src 'none'
+    """
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ---------------------------------------------------------------
+# ENVIRONMENT VARIABLES (set these in the Netlify UI, not here —
+# never commit secrets to the repo)
+#
+#   PAYWALL_ENABLED    leave unset or "false" during the free test.
+#                      Set "true" to start charging.
+#   STRIPE_SECRET_KEY  only needed once PAYWALL_ENABLED is true
+#   STRIPE_PRICE_ID    the price_... id from your Stripe product
+#   SITE_ORIGIN        https://your-domain.com
+# ---------------------------------------------------------------
+
+# The engine's source lives in /lib so the functions can import it. It is
+# not secret (all credentials are env vars), but there is no reason to
+# serve it to visitors, so it 404s.
+[[redirects]]
+  from = "/lib/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/docs-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# ===============================================================
+# COMPLIANCE PLATFORM
+#
+# The portal, admin console and report are plain static pages under
+# /compliance/. The API is netlify/functions/compliance-*.mjs, routed by
+# each function's own `export const config = { path }` — no redirects needed.
+# The admin console is gated at the edge by
+# netlify/edge-functions/compliance-admin-gate.js before its HTML is served.
+#
+# Deliberately NOT changed: the site-wide CSP. The portal loads no external
+# script — it talks to Netlify Identity at /.netlify/identity, same origin —
+# so script-src 'self' still holds.
+#
+# NOTE ON force: a redirect only fires when no real file sits at that path,
+# unless force is set. Every 404 guard below (and the pre-existing /lib and
+# /docs- ones) needs it, or the source files are served as static assets.
+# ===============================================================
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Compliance pages carry private client data — never cache, never index.
+[[headers]]
+  for = "/compliance/*"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# Source and tooling that lives in the repo but must not be served, following
+# the same pattern already used for /lib.
+[[redirects]]
+  from = "/agent/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tests/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true

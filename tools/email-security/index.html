@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Email Security Checker — SPF, DKIM &amp; DMARC | TEKNIK</title>
+<meta name="description" content="Check whether your domain can be spoofed. Free instant check of your SPF, DKIM and DMARC records, with a plain-English explanation of what each result means.">
+
+<link rel="canonical" href="https://tnbcg.tech/tools/email-security/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tnbcg.tech/tools/email-security/">
+<meta property="og:site_name" content="TEKNIK">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Free Email Security Checker — SPF, DKIM &amp; DMARC">
+<meta property="og:description" content="Find out in seconds whether someone can send email pretending to be your company.">
+<meta property="og:image" content="https://tnbcg.tech/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TEKNIK — where solutions connect">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Email Security Checker — SPF, DKIM &amp; DMARC">
+<meta name="twitter:description" content="Find out in seconds whether someone can send email pretending to be your company.">
+<meta name="twitter:image" content="https://tnbcg.tech/assets/og-image.png">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0147FF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="/" aria-label="TEKNIK home">
+      <img src="/assets/logo-teknik.png" alt="TEKNIK — where solutions connect" width="780" height="140">
+    </a>
+    <div class="hdr__side">
+      <a class="back" href="/tools/">← All tools</a>
+      <a class="tel" href="tel:+13054199992">305-419-9992</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <p class="kicker">Free tool</p>
+  <h1>Can someone send email pretending to be you?</h1>
+  <p class="lede">Enter your domain and we'll check the three DNS records that decide the answer: SPF, DKIM and DMARC. It takes a couple of seconds, there's nothing to install, and you'll get a plain-English explanation of every result.</p>
+
+  <div class="tool">
+    <form id="f" novalidate>
+      <label for="domain">Your domain</label>
+      <div class="inline">
+        <input id="domain" name="domain" type="text" inputmode="url" autocomplete="off"
+               placeholder="yourcompany.com" aria-describedby="hint" required>
+        <button class="btn" id="go" type="submit">Check my domain</button>
+      </div>
+      <p class="hint" id="hint">We read public DNS records only — the same thing every mail server in the world does. Nothing is scanned, probed or connected to, and we don't store your domain.</p>
+    </form>
+  </div>
+
+  <div id="err" class="err" hidden role="alert"></div>
+
+  <section id="out" hidden aria-live="polite">
+    <div class="grade">
+      <div class="grade__badge" id="badge" aria-hidden="true">–</div>
+      <div>
+        <h2 id="gtitle">Result</h2>
+        <p id="gsum"></p>
+      </div>
+    </div>
+
+    <ul class="checks" id="checks"></ul>
+
+    <div class="upsell" id="upsell">
+      <h3>Fix it: step-by-step remediation <span class="free-badge" id="freeBadge" hidden>Free while we test</span></h3>
+      <p>Knowing you have a problem is the easy half. The remediation report explains exactly what to change, in what order, with the records to publish.</p>
+      <ul>
+        <li>Specific fixes for every failed check on your domain</li>
+        <li>Example records you can copy, with the pitfalls called out</li>
+        <li>The safe rollout sequence, so you don't break legitimate mail</li>
+        <li>What each framework — HIPAA, PCI-DSS, SOC 2 — expects here</li>
+      </ul>
+      <button class="btn" id="getReport" type="button">Get the remediation report</button>
+      <p class="hint" id="priceNote" hidden><span class="price"></span> one-time</p>
+    </div>
+
+    <div id="report" hidden></div>
+
+    <div class="note">
+      <p style="margin:0"><strong>Want someone to just do it?</strong> Email authentication is fiddly and easy to break. We configure this for clients as part of managed IT, alongside the rest of their Microsoft&nbsp;365 hardening. <a href="/#contact">Book a free assessment</a> or call <a href="tel:+13054199992">305-419-9992</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap ft__in">
+    <span>© 2026 TEKNIK · <a href="/">Home</a> · <a href="/tools/">Tools</a> · <a href="/#contact">Contact</a></span>
+    <span><a href="tel:+13054199992">305-419-9992</a> · <a href="mailto:info@tnbcg.com">info@tnbcg.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var f=document.getElementById('f'), go=document.getElementById('go'),
+      out=document.getElementById('out'), err=document.getElementById('err'),
+      checks=document.getElementById('checks'), badge=document.getElementById('badge'),
+      gtitle=document.getElementById('gtitle'), gsum=document.getElementById('gsum'),
+      reportBox=document.getElementById('report'), getReport=document.getElementById('getReport'),
+      freeBadge=document.getElementById('freeBadge'), priceNote=document.getElementById('priceNote');
+
+  var failed=[];
+
+  function show(el,on){ el.hidden=!on; }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var domain=document.getElementById('domain').value.trim();
+    if(!domain) return;
+
+    show(err,false); show(out,false); show(reportBox,false);
+    reportBox.innerHTML='';
+    go.disabled=true; go.innerHTML='<span class="spin"></span>Checking…';
+
+    try{
+      var res=await fetch('/.netlify/functions/email-security',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({domain:domain})
+      });
+      var data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Something went wrong.');
+      render(data);
+    }catch(ex){
+      err.textContent=ex.message||'Something went wrong. Please try again.';
+      show(err,true);
+    }finally{
+      go.disabled=false; go.textContent='Check my domain';
+    }
+  });
+
+  function render(data){
+    badge.textContent=data.grade.letter;
+    badge.setAttribute('data-t',data.grade.tone);
+    gtitle.textContent=data.domain+' scored '+data.grade.pc+'%';
+    gsum.textContent=data.grade.summary;
+
+    var labels={ok:'Pass',warn:'Needs work',bad:'Fail'};
+    checks.innerHTML=data.checks.map(function(c){
+      return '<li><span class="pill" data-t="'+c.status+'">'+labels[c.status]+'</span>'+
+        '<div><b>'+esc(c.title)+'</b><span>'+esc(c.detail)+'</span>'+
+        (c.value?'<span style="margin-top:.5rem"><code>'+esc(c.value)+'</code></span>':'')+
+        '</div></li>';
+    }).join('');
+
+    failed=data.checks.filter(function(c){return c.status!=='ok';}).map(function(c){return c.id;});
+    show(out,true);
+    out.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  getReport.addEventListener('click', async function(){
+    getReport.disabled=true;
+    getReport.innerHTML='<span class="spin"></span>Building your report…';
+    try{
+      var params=new URLSearchParams(location.search);
+      var res=await fetch('/.netlify/functions/report',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({tool:'email',findings:failed,sessionId:params.get('session_id')})
+      });
+
+      if(res.status===402){
+        // Paywall is on and this visitor hasn't paid — send them to Checkout.
+        var co=await fetch('/.netlify/functions/create-checkout',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({tool:'email'})
+        });
+        var s=await co.json();
+        if(s.url){ location.href=s.url; return; }
+        throw new Error('Could not start checkout. Please call us instead.');
+      }
+
+      var data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Could not load the report.');
+      if(data.free) show(freeBadge,true);
+
+      reportBox.innerHTML='<h2 style="margin-top:2.4rem">Your remediation plan</h2>'+
+        data.sections.map(function(s){
+          return '<div class="upsell" style="border-left-color:var(--accent)">'+
+            '<h3>'+esc(s.title)+'</h3><p>'+esc(s.why)+'</p><ul>'+
+            s.steps.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>'+
+            (s.example?'<p style="margin:0"><code>'+esc(s.example)+'</code></p>':'')+
+            '</div>';
+        }).join('');
+      show(reportBox,true);
+      document.getElementById('upsell').hidden=true;
+      reportBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(ex){
+      err.textContent=ex.message; show(err,true);
+    }finally{
+      getReport.disabled=false; getReport.textContent='Get the remediation report';
+    }
+  });
+
+  // Returning from a successful Stripe checkout — fetch the report straight away.
+  if(new URLSearchParams(location.search).get('session_id')){
+    var saved=new URLSearchParams(location.search).get('d');
+    if(saved){ document.getElementById('domain').value=saved; f.requestSubmit(); }
+  }
+})();
+</script>
+</body>
+</html>

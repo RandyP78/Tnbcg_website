@@ -1,0 +1,14 @@
+{
+  "name": "tnbcg-site",
+  "private": true,
+  "description": "TEKNIK (TNB Consulting Group, LLC) — tnbcg.tech. Static site plus Netlify Functions.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.0.3",
+    "@netlify/database": "^2.0.1",
+    "@netlify/identity": "^2.0.0"
+  }
+}

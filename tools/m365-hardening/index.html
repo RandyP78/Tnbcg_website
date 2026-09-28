@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Microsoft 365 Security Self-Check | TEKNIK</title>
+<meta name="description" content="Twelve questions to find out how far your Microsoft 365 tenant has moved past its default settings. Free, instant, nothing to install.">
+
+<link rel="canonical" href="https://tnbcg.tech/tools/m365-hardening/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tnbcg.tech/tools/m365-hardening/">
+<meta property="og:site_name" content="TEKNIK">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Free Microsoft 365 Security Self-Check">
+<meta property="og:description" content="Most tenants still run on defaults that were never meant to be a security posture. Find out where yours stands.">
+<meta property="og:image" content="https://tnbcg.tech/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TEKNIK — where solutions connect">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Microsoft 365 Security Self-Check">
+<meta name="twitter:description" content="Most tenants still run on defaults that were never meant to be a security posture. Find out where yours stands.">
+<meta name="twitter:image" content="https://tnbcg.tech/assets/og-image.png">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0147FF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="/" aria-label="TEKNIK home">
+      <img src="/assets/logo-teknik.png" alt="TEKNIK — where solutions connect" width="780" height="140">
+    </a>
+    <div class="hdr__side">
+      <a class="back" href="/tools/">← All tools</a>
+      <a class="tel" href="tel:+13054199992">305-419-9992</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <p class="kicker">Free tool</p>
+  <h1>How hardened is your Microsoft 365 tenant?</h1>
+  <p class="lede">Microsoft ships defaults chosen to work for every organisation on earth. That's the right call for Microsoft and the wrong configuration for a business handling patient records, cardholder data or CUI. Twelve questions, about three minutes, and nothing leaves your browser.</p>
+
+  <form id="quiz" class="tool"></form>
+
+  <div class="inline" style="margin-top:1.6rem">
+    <button class="btn" id="score" type="button">See my score</button>
+    <button class="btn btn--ghost" id="reset" type="button">Start over</button>
+  </div>
+  <p class="hint">Answers are scored in your browser. We don't transmit or store them.</p>
+
+  <div id="err" class="err" hidden role="alert"></div>
+
+  <section id="out" hidden aria-live="polite">
+    <div class="grade">
+      <div class="grade__badge" id="badge" aria-hidden="true">–</div>
+      <div>
+        <h2 id="gtitle">Result</h2>
+        <p id="gsum"></p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:2.4rem">What's not in place</h2>
+    <ul class="checks" id="gaps"></ul>
+
+    <div class="upsell" id="upsell">
+      <h3>The remediation playbook <span class="free-badge" id="freeBadge" hidden>Free while we test</span></h3>
+      <p>For every gap above: why it matters, exactly where the setting lives in the admin centre, and the order to change things in so you don't lock anyone out.</p>
+      <ul>
+        <li>Admin centre paths for each control, not vague advice</li>
+        <li>The sequence that avoids breaking sign-in for your staff</li>
+        <li>Licensing notes, since some controls need a specific tier</li>
+        <li>What auditors look for under HIPAA, PCI-DSS, SOC 2 and CMMC</li>
+      </ul>
+      <button class="btn" id="getReport" type="button">Get the playbook</button>
+    </div>
+
+    <div id="report" hidden></div>
+
+    <div class="note">
+      <p style="margin:0"><strong>A score isn't an audit.</strong> This is a self-assessment based on your own answers — useful for finding obvious gaps, not a substitute for reviewing the tenant itself. We do that as part of a free assessment. <a href="/#contact">Book one</a> or call <a href="tel:+13054199992">305-419-9992</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap ft__in">
+    <span>© 2026 TEKNIK · <a href="/">Home</a> · <a href="/tools/">Tools</a> · <a href="/#contact">Contact</a></span>
+    <span><a href="tel:+13054199992">305-419-9992</a> · <a href="mailto:info@tnbcg.com">info@tnbcg.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var Q=[
+    {id:'mfa',w:5,q:'Is multi-factor authentication enforced for every user account?',
+     h:'Not just available — actually required, with no standing exceptions beyond one break-glass account.'},
+    {id:'legacy',w:4,q:'Is legacy authentication blocked?',
+     h:'IMAP, POP and SMTP AUTH don\u2019t support MFA, so leaving them enabled lets attackers walk around it.'},
+    {id:'admin',w:4,q:'Are global admin accounts separate from everyday user accounts?',
+     h:'An admin who also reads email on that account is one phishing click from a full tenant compromise.'},
+    {id:'audit',w:4,q:'Is unified audit logging enabled with at least twelve months of retention?',
+     h:'This is the evidence an auditor asks for, and you can\u2019t generate it retroactively.'},
+    {id:'consent',w:3,q:'Are users blocked from granting third-party apps access on their own?',
+     h:'Consent phishing exploits the default here, and it survives a password reset.'},
+    {id:'sharing',w:3,q:'Is external sharing in SharePoint and OneDrive restricted?',
+     h:'Defaults allow anonymous links that never expire and can be forwarded freely.'},
+    {id:'forwarding',w:4,q:'Is automatic external mail forwarding blocked?',
+     h:'A forwarding rule is the classic persistence step after a mailbox is compromised.'},
+    {id:'backup',w:4,q:'Is Microsoft 365 backed up to somewhere outside the tenant?',
+     h:'Retention policies are not backup. Deleted mail and files age out permanently.'},
+    {id:'dns',w:4,q:'Are SPF, DKIM and DMARC all configured, with DMARC actually enforcing?',
+     h:'Unsure? Our free email checker answers this in a couple of seconds.'},
+    {id:'phishing',w:3,q:'Is anti-phishing configured with impersonation protection for finance and executives?',
+     h:'The default anti-spam policy doesn\u2019t include impersonation protection.'},
+    {id:'offboard',w:3,q:'Does offboarding explicitly revoke active sessions and tokens?',
+     h:'Removing a licence doesn\u2019t end a live session. Tokens can stay valid well after departure.'},
+    {id:'training',w:2,q:'Does staff security training happen more than once a year, with records kept?',
+     h:'Most intrusions start with a person. Most frameworks require evidence of training.'}
+  ];
+
+  var quiz=document.getElementById('quiz'),
+      out=document.getElementById('out'), err=document.getElementById('err'),
+      gaps=document.getElementById('gaps'), badge=document.getElementById('badge'),
+      gtitle=document.getElementById('gtitle'), gsum=document.getElementById('gsum'),
+      reportBox=document.getElementById('report'), getReport=document.getElementById('getReport'),
+      freeBadge=document.getElementById('freeBadge');
+
+  var failed=[];
+
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  quiz.innerHTML=Q.map(function(item,i){
+    var n='q'+i;
+    return '<fieldset class="q" style="border:0;padding:1.2rem 0;margin:0">'+
+      '<legend style="padding:0"><p>'+(i+1)+'. '+esc(item.q)+'<small>'+esc(item.h)+'</small></p></legend>'+
+      '<div class="opts">'+
+        '<label><input type="radio" name="'+n+'" value="1"> Yes</label>'+
+        '<label><input type="radio" name="'+n+'" value="0.5"> Partly</label>'+
+        '<label><input type="radio" name="'+n+'" value="0"> No</label>'+
+        '<label><input type="radio" name="'+n+'" value="0"> Not sure</label>'+
+      '</div></fieldset>';
+  }).join('');
+
+  document.getElementById('reset').addEventListener('click',function(){
+    quiz.reset(); out.hidden=true; err.hidden=true; reportBox.hidden=true;
+    document.getElementById('upsell').hidden=false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.getElementById('score').addEventListener('click',function(){
+    var got=0,max=0,missing=0;
+    failed=[];
+    Q.forEach(function(item,i){
+      var sel=quiz.querySelector('input[name="q'+i+'"]:checked');
+      max+=item.w;
+      if(!sel){ missing++; return; }
+      var v=parseFloat(sel.value);
+      got+=item.w*v;
+      if(v<1) failed.push(item.id);
+    });
+
+    if(missing){
+      err.textContent='Please answer all '+Q.length+' questions — '+missing+' still to go.';
+      err.hidden=false; return;
+    }
+    err.hidden=true;
+
+    var pc=Math.round(got/max*100), tier, tone, letter, summary;
+    if(pc>=90){ letter='A'; tone='ok'; tier='Regulated'; summary='Strong. Your tenant is configured close to what a regulated environment needs.'; }
+    else if(pc>=72){ letter='B'; tone='ok'; tier='Enhanced'; summary='Good baseline with some gaps. You are past the defaults but not yet audit-ready.'; }
+    else if(pc>=50){ letter='C'; tone='warn'; tier='Baseline'; summary='Partially hardened. The basics are there; the controls auditors ask about are not.'; }
+    else if(pc>=30){ letter='D'; tone='warn'; tier='Below baseline'; summary='Significant gaps. Several of these are routinely exploited.'; }
+    else { letter='F'; tone='bad'; tier='Default'; summary='Your tenant is running close to out-of-the-box settings. This needs attention soon.'; }
+
+    badge.textContent=letter; badge.setAttribute('data-t',tone);
+    gtitle.textContent='You scored '+pc+'% — '+tier;
+    gsum.textContent=summary;
+
+    var byId={}; Q.forEach(function(i){byId[i.id]=i;});
+    gaps.innerHTML = failed.length
+      ? failed.map(function(id){
+          var sel=quiz.querySelector('input[name="q'+Q.indexOf(byId[id])+'"]:checked');
+          var partial=sel&&sel.value==='0.5';
+          return '<li><span class="pill" data-t="'+(partial?'warn':'bad')+'">'+(partial?'Partial':'Gap')+'</span>'+
+            '<div><b>'+esc(byId[id].q)+'</b><span>'+esc(byId[id].h)+'</span></div></li>';
+        }).join('')
+      : '<li><span class="pill" data-t="ok">Clear</span><div><b>No gaps reported</b><span>Worth verifying against the tenant itself — self-assessments are optimistic more often than not.</span></div></li>';
+
+    out.hidden=false;
+    out.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  getReport.addEventListener('click', async function(){
+    getReport.disabled=true;
+    getReport.innerHTML='<span class="spin"></span>Building your playbook…';
+    try{
+      var params=new URLSearchParams(location.search);
+      var res=await fetch('/.netlify/functions/report',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({tool:'m365',findings:failed,sessionId:params.get('session_id')})
+      });
+
+      if(res.status===402){
+        var co=await fetch('/.netlify/functions/create-checkout',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({tool:'m365'})
+        });
+        var s=await co.json();
+        if(s.url){ location.href=s.url; return; }
+        throw new Error('Could not start checkout. Please call us instead.');
+      }
+
+      var data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Could not load the playbook.');
+      if(data.free) freeBadge.hidden=false;
+
+      reportBox.innerHTML='<h2 style="margin-top:2.4rem">Your remediation playbook</h2>'+
+        data.sections.map(function(s){
+          return '<div class="upsell">'+
+            '<h3>'+esc(s.title)+'</h3>'+
+            (s.where?'<p style="margin:0 0 .6em"><code>'+esc(s.where)+'</code></p>':'')+
+            '<p>'+esc(s.why)+'</p><ul>'+
+            s.steps.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>'+
+            (s.link?'<a class="btn btn--sm btn--ghost" href="'+esc(s.link)+'">Open that tool</a>':'')+
+            '</div>';
+        }).join('');
+      reportBox.hidden=false;
+      document.getElementById('upsell').hidden=true;
+      reportBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(ex){
+      err.textContent=ex.message; err.hidden=false;
+    }finally{
+      getReport.disabled=false; getReport.textContent='Get the playbook';
+    }
+  });
+})();
+</script>
+</body>
+</html>
